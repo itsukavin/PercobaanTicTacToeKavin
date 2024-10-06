@@ -48,10 +48,10 @@ main {
     border: solid 4px #2A2343;
 }
 #header #xPlayerDisplay {
-    color: #1892EA;
+    color: #ea1818;
 }
 #header #oPlayerDisplay {
-    color: #A737FF;
+    color: #37f8ff;
 }
 
 #board {
@@ -93,4 +93,6 @@ main {
     background: #2A2343;
 }                                           
                                          
-            
+.form-group {
+    margin-bottom: 20px;
+}
