@@ -45,7 +45,7 @@ function tapCell(cell, index) {
 function updateCell(cell, index) {
     cell.textContent = player
     inputCells[index] = player
-    cell.style.color = (player == 'X') ? '#1892EA' : '#A737FF'
+    cell.style.color = (player == 'X') ? '#ea1818' : '#37f8ff'
 }
 
 function changePlayer() {
