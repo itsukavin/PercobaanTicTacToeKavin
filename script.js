@@ -1,26 +1,66 @@
-<!DOCTYPE html>
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>かわいい</title>
-    <link rel="stylesheet" href="cul.css">
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;500;700&display=swap" rel="stylesheet">
-</head>
-<body>
-    <div class="container">
-        <h1 class="main-title2">Hello, Siyu!</h1>
-        <h1 style="font-size:22px;"><p style="color: pink; font-size: 22px;">  
-            私があなたを好きだと思うのは本当だと思います、なぜなら私が毎日あなたのことを考えていることに今気づいたからです。あなたと遊ばなかったり、あなたと話さなかったりすると退屈してしまいます。しばらく眠ってから再び起きて、オンラインかどうかを確認するためにあなたを待ち続けます。それを何度もやり続けています。そして、私はあなたを好きになり始めていることに今気づきました。あなたの顔を知らなくても、あなたの性格、優しいところ、面白いところ、優しいところ、すべてが大好きです！もう我慢できない この気持ちを正直に伝えないといけないけど、関係を壊してしまったら大変です。私が言いたいのはそれだけです。ありがとうございます
-        </h1></h1>
-    </div>
+                                        function calculateLove() {
+    const name1 = document.getElementById('name1').value.trim();
+    const name2 = document.getElementById('name2').value.trim();
 
-    <div id="notification" class="notification" style="display: none;">
-        <span id="notificationMessage"></span>
-        <button id="closeNotification" onclick="closeNotification()">×</button>
-        <div class="notification-progress"></div>
-    </div>
+    if (!isValidInput(name1) || !isValidInput(name2)) {
+        showNotification('names must be between 2/20 characters');
+        return;
+    }
 
-    <script src="cul.js"></script>
-</body>
-</html>
+    document.getElementById('loading').style.display = 'block';
+
+    setTimeout(() => {
+        const lovePercentage = Math.floor(Math.random() * 101);
+        document.getElementById('loading').style.display = 'none';
+        drawResult(name1, name2, lovePercentage);
+    }, 2000);
+}
+
+function isValidInput(name) {
+    return name.length >= 2 && name.length <= 20;
+}
+
+function showNotification(message) {
+    const notification = document.getElementById('notification');
+    const messageSpan = document.getElementById('notificationMessage');
+    messageSpan.textContent = message;
+    
+    notification.style.display = 'flex';
+    setTimeout(() => { closeNotification(); }, 10000);
+}
+
+function closeNotification() {
+    document.getElementById('notification').style.display = 'none';
+}
+
+function drawResult(name1, name2, percentage) {
+    const canvas = document.getElementById('resultCanvas');
+    const ctx = canvas.getContext('2d');
+
+    canvas.width = 400;
+    canvas.height = 200;
+
+    const gradient = ctx.createLinearGradient(0, 0, canvas.width, canvas.height);
+    gradient.addColorStop(0, '#ffafbd');
+    gradient.addColorStop(1, '#ffc3a0');
+    ctx.fillStyle = gradient;
+    ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+    ctx.fillStyle = '#ffffff';
+    ctx.font = '26px Montserrat';
+    ctx.textAlign = 'center';
+    ctx.fillText(`${name1} ❤️ ${name2}`, canvas.width / 2, 80);
+    ctx.fillText(`Love Percentage: ${percentage}%`, canvas.width / 2, 130);
+
+    document.getElementById('resultWrapper').style.display = 'block';
+}
+
+function saveImage() {
+    const canvas = document.getElementById('resultCanvas');
+    const link = document.createElement('a');
+    link.download = 'love.png';
+    link.href = canvas.toDataURL('image/png');
+    link.click();
+}
  
+            
